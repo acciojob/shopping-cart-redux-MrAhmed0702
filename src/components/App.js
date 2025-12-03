@@ -1,13 +1,37 @@
+import React, { useEffect } from "react";
+import { Provider, useDispatch } from "react-redux";
+import store from "../redux/store";
+import ProductList from "./ProductList";
+import Cart from "./Cart";
+import Wishlist from "./Wishlist";
+import Coupon from "./Coupon";
+import { setProducts } from "../redux/actions";
 
-import React from "react";
-import './../styles/App.css';
+const FetchWrapper = () => {
+  const dispatch = useDispatch();
 
-const App = () => {
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then(res => res.json())
+      .then(data => dispatch(setProducts(data)));
+  }, [dispatch]);
+
   return (
     <div>
-        {/* Do not remove the main div */}
+      {/* Do not remove main div */}
+      <h1>Shopping Cart</h1>
+      <ProductList />
+      <Coupon />
+      <Cart />
+      <Wishlist />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default function App() {
+  return (
+    <Provider store={store}>
+      <FetchWrapper />
+    </Provider>
+  );
+}
