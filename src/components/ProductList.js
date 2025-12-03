@@ -1,28 +1,25 @@
-// ProductList.js
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { addToCart, addToWishlist } from '../redux/actions';
-import { products } from '../data/products';  // Assuming this is where product data is stored
+import products from '../data/products';  // Correct import
 
 const ProductList = () => {
   const dispatch = useDispatch();
 
-  const handleAddToCart = (product) => {
-    dispatch(addToCart(product));
-  };
-
-  const handleAddToWishlist = (product) => {
-    dispatch(addToWishlist(product));
-  };
+  if (!products || products.length === 0) {
+    return <p>No products available</p>;
+  }
 
   return (
     <div className="product-list">
       {products.map((product) => (
         <div key={product.id} className="product">
-          <h5>{product.name}</h5>
-          <p>${product.price}</p>
-          <button onClick={() => handleAddToCart(product)} className="add-to-cart">Add to Cart</button>
-          <button onClick={() => handleAddToWishlist(product)} className="add-to-wishlist">Add to Wishlist</button>
+          <img src={product.image} alt={product.title} />
+          <h5>{product.title}</h5>
+          <p>{product.description}</p>
+          <p>Price: ${(product.price / 100).toFixed(2)}</p>  {/* Display price in dollars */}
+          <button onClick={() => dispatch(addToCart(product))}>Add to Cart</button>
+          <button onClick={() => dispatch(addToWishlist(product))}>Add to Wishlist</button>
         </div>
       ))}
     </div>
