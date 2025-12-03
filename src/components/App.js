@@ -1,37 +1,29 @@
-import React, { useEffect } from "react";
-import { Provider, useDispatch } from "react-redux";
+import React from "react";
+import { Provider } from "react-redux";
 import store from "../redux/store";
+
 import ProductList from "./ProductList";
 import Cart from "./Cart";
 import Wishlist from "./Wishlist";
 import Coupon from "./Coupon";
-import { setProducts } from "../redux/actions";
 
-const FetchWrapper = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
-      .then(res => res.json())
-      .then(data => dispatch(setProducts(data)));
-  }, [dispatch]);
-
+const App = () => {
   return (
-    <div>
-      {/* Do not remove main div */}
-      <h1>Shopping Cart</h1>
-      <ProductList />
-      <Coupon />
-      <Cart />
-      <Wishlist />
-    </div>
+    <Provider store={store}>
+      <div>
+        {/* Do not remove the main div */}
+        
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <h1 className="text-center w-100">Shopping Cart</h1>
+        </nav>
+
+        <ProductList />
+        <Coupon />
+        <Cart />
+        <Wishlist />
+      </div>
+    </Provider>
   );
 };
 
-export default function App() {
-  return (
-    <Provider store={store}>
-      <FetchWrapper />
-    </Provider>
-  );
-}
+export default App;

@@ -1,5 +1,4 @@
 import {
-  SET_PRODUCTS,
   ADD_TO_CART,
   REMOVE_FROM_CART,
   INCREASE_QTY,
@@ -10,7 +9,6 @@ import {
 } from "./actions";
 
 const initialState = {
-  products: [],
   cart: [],
   wishlist: [],
   discount: 0,
@@ -19,17 +17,14 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    
-    case SET_PRODUCTS:
-      return { ...state, products: action.payload };
 
     case ADD_TO_CART:
-      const exists = state.cart.find(i => i.id === action.payload.id);
+      let exists = state.cart.find(p => p.id === action.payload.id);
       if (exists) {
         return {
           ...state,
-          cart: state.cart.map(i =>
-            i.id === exists.id ? { ...i, qty: i.qty + 1 } : i
+          cart: state.cart.map(p =>
+            p.id === exists.id ? { ...p, qty: p.qty + 1 } : p
           )
         };
       }
@@ -41,35 +36,35 @@ export default function reducer(state = initialState, action) {
     case REMOVE_FROM_CART:
       return {
         ...state,
-        cart: state.cart.filter(i => i.id !== action.payload)
+        cart: state.cart.filter(p => p.id !== action.payload)
       };
 
     case INCREASE_QTY:
       return {
         ...state,
-        cart: state.cart.map(i =>
-          i.id === action.payload ? { ...i, qty: i.qty + 1 } : i
+        cart: state.cart.map(p =>
+          p.id === action.payload ? { ...p, qty: p.qty + 1 } : p
         )
       };
 
     case DECREASE_QTY:
       return {
         ...state,
-        cart: state.cart.map(i =>
-          i.id === action.payload && i.qty > 1
-            ? { ...i, qty: i.qty - 1 }
-            : i
+        cart: state.cart.map(p =>
+          p.id === action.payload && p.qty > 1
+            ? { ...p, qty: p.qty - 1 }
+            : p
         )
       };
 
     case ADD_TO_WISHLIST:
-      if (state.wishlist.find(i => i.id === action.payload.id)) return state;
+      if (state.wishlist.find(p => p.id === action.payload.id)) return state;
       return { ...state, wishlist: [...state.wishlist, action.payload] };
 
     case REMOVE_FROM_WISHLIST:
       return {
         ...state,
-        wishlist: state.wishlist.filter(i => i.id !== action.payload)
+        wishlist: state.wishlist.filter(p => p.id !== action.payload)
       };
 
     case APPLY_COUPON:
@@ -79,8 +74,8 @@ export default function reducer(state = initialState, action) {
 
       return {
         ...state,
-        appliedCoupon: action.payload,
-        discount
+        discount,
+        appliedCoupon: action.payload
       };
 
     default:

@@ -7,17 +7,20 @@ const Coupon = () => {
   const dispatch = useDispatch();
 
   return (
-    <div>
+    <div className="container mt-4">
       <h2>Apply Coupon</h2>
 
       <input
         type="text"
-        placeholder="Enter coupon code"
+        className="form-control w-50"
+        placeholder="Enter code (SAVE10 / SAVE20)"
         value={code}
-        onChange={(e) => setCode(e.target.value)}
+        onChange={e => setCode(e.target.value)}
       />
 
-      <button onClick={() => dispatch(applyCoupon(code))}>
+      <button className="btn btn-dark mt-2"
+        onClick={() => dispatch(applyCoupon(code))}
+      >
         Apply
       </button>
     </div>

@@ -7,27 +7,38 @@ const Cart = () => {
   const discount = useSelector(state => state.discount);
   const dispatch = useDispatch();
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
   const finalTotal = total - (total * discount) / 100;
 
   return (
-    <div>
-      <h2>Cart</h2>
-
-      {cart.length === 0 && <p>No items in cart</p>}
+    <div className="container mt-4">
+      <h2 className="text-start">Cart</h2>
 
       {cart.map(item => (
-        <div key={item.id} className="cart-row">
-          <h3>{item.title}</h3>
-          <p>Price: Rs {item.price}</p>
-          <p>Qty: {item.qty}</p>
+        <div key={item.id} className="row my-2 p-2 border">
+          <div className="col">
+            <h4>{item.title}</h4>
+            <p>Price: Rs {item.price}</p>
+            <p>Qty: {item.qty}</p>
 
-          <button onClick={() => dispatch(increaseQty(item.id))}>+</button>
-          <button onClick={() => dispatch(decreaseQty(item.id))}>-</button>
+            <button className="btn btn-success"
+              onClick={() => dispatch(increaseQty(item.id))}
+            >
+              +
+            </button>
 
-          <button onClick={() => dispatch(removeFromCart(item.id))}>
-            Remove
-          </button>
+            <button className="btn btn-warning mx-2"
+              onClick={() => dispatch(decreaseQty(item.id))}
+            >
+              -
+            </button>
+
+            <button className="btn btn-danger"
+              onClick={() => dispatch(removeFromCart(item.id))}
+            >
+              Remove
+            </button>
+          </div>
         </div>
       ))}
 
