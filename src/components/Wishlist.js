@@ -18,7 +18,7 @@ const Wishlist = () => {
             <button
               className="btn btn-primary mr-2"
               onClick={() => dispatch(addToCart(item))}
-              data-cy="add-to-cart-btn"
+              data-cy={`add-to-cart-btn-${item.id}`}
             >
               Add To Cart
             </button>
@@ -26,7 +26,7 @@ const Wishlist = () => {
             <button
               className="btn btn-danger"
               onClick={() => dispatch(removeFromWishlist(item.id))}
-              data-cy="remove-from-wishlist-btn"
+              data-cy={`remove-from-wishlist-btn-${item.id}`}
             >
               Remove
             </button>

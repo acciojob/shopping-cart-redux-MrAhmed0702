@@ -20,6 +20,7 @@ const ProductList = () => {
               <button
                 className="btn btn-primary mb-2"
                 onClick={() => dispatch(addToCart(p))}
+                data-cy={`add-to-cart-btn-${p.id}`}
               >
                 Add To Cart
               </button>
@@ -27,6 +28,7 @@ const ProductList = () => {
               <button
                 className="btn btn-secondary"
                 onClick={() => dispatch(addToWishlist(p))}
+                data-cy={`add-to-wishlist-btn-${p.id}`}
               >
                 Add To Wishlist
               </button>
