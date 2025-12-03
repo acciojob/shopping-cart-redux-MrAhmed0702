@@ -18,6 +18,7 @@ const Cart = () => {
             <button
               className="btn btn-success mr-2 increase-btn"
               onClick={() => dispatch(increaseQty(item.id))}
+              data-cy="increase-btn"
             >
               +
             </button>
@@ -25,6 +26,7 @@ const Cart = () => {
             <button
               className="btn btn-warning mr-2 decrease-btn"
               onClick={() => dispatch(decreaseQty(item.id))}
+              data-cy="decrease-btn"
             >
               -
             </button>
@@ -32,6 +34,7 @@ const Cart = () => {
             <button
               className="btn btn-danger"
               onClick={() => dispatch(removeFromCart(item.id))}
+              data-cy="remove-btn"
             >
               Remove
             </button>

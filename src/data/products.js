@@ -5,7 +5,7 @@ const products = [
     price: 1799,
     description: "Shirt - Blue",
     category: "fashion",
-    image: "img1.png"
+    image: "img1.png",
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const products = [
     price: 2599,
     description: "Hoodie - Red",
     category: "fashion",
-    image: "img2.png"
+    image: "img2.png",
   },
   {
     id: 3,
@@ -21,8 +21,16 @@ const products = [
     price: 1599,
     description: "Tshirt - Navy",
     category: "fashion",
-    image: "img3.png"
-  }
+    image: "img3.png",
+  },
+  {
+    id: 4,
+    title: "Black Jacket",
+    price: 3999,
+    description: "Jacket - Black",
+    category: "fashion",
+    image: "img4.png",
+  },
 ];
 
 export default products;

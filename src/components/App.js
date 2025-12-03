@@ -10,7 +10,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <div>
-        <h3 className="text-center">Shopping Cart App</h3>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <h3 className="text-center">Shopping Cart App</h3>
+        </nav>
 
         <div className="container mt-4">
           <ProductList />
