@@ -6,6 +6,16 @@ const Wishlist = () => {
   const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
+  // Handle the case when the wishlist is empty
+  if (wishlist.length === 0) {
+    return (
+      <div className="mt-5">
+        <h3>Wishlist</h3>
+        <p>Your wishlist is empty. Start adding items!</p>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-5">
       <h3>Wishlist</h3>
@@ -19,6 +29,7 @@ const Wishlist = () => {
               className="btn btn-primary mr-2"
               onClick={() => dispatch(addToCart(item))}
               data-cy={`add-to-cart-btn-${item.id}`}
+              aria-label={`Add ${item.title} to cart`}
             >
               Add To Cart
             </button>
@@ -27,6 +38,7 @@ const Wishlist = () => {
               className="btn btn-danger"
               onClick={() => dispatch(removeFromWishlist(item.id))}
               data-cy={`remove-from-wishlist-btn-${item.id}`}
+              aria-label={`Remove ${item.title} from wishlist`}
             >
               Remove
             </button>

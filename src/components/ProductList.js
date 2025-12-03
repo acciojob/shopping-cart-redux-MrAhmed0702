@@ -11,7 +11,11 @@ const ProductList = () => {
       {products.map((p) => (
         <div key={p.id} className="col-md-3">
           <div className="custom-card card mb-3">
-            <img src={p.image} className="card-img-top" />
+            <img
+              src={p.image}
+              alt={p.title}  // Added alt attribute for accessibility and testing
+              className="card-img-top"
+            />
             <div className="card-body">
               <h4>{p.title}</h4>
               <p>{p.description}</p>

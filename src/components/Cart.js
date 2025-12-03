@@ -6,6 +6,15 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
+  if (cart.length === 0) {
+    return (
+      <div className="mt-5">
+        <h3>Cart</h3>
+        <p>Your cart is empty. Start shopping!</p>
+      </div>
+    );
+  }
+
   return (
     <div className="mt-5">
       <h3>Cart</h3>
@@ -19,6 +28,7 @@ const Cart = () => {
               className="btn btn-success mr-2 increase-btn"
               onClick={() => dispatch(increaseQty(item.id))}
               data-cy={`increase-btn-${item.id}`}
+              aria-label={`Increase quantity of ${item.title}`}
             >
               +
             </button>
@@ -27,6 +37,7 @@ const Cart = () => {
               className="btn btn-warning mr-2 decrease-btn"
               onClick={() => dispatch(decreaseQty(item.id))}
               data-cy={`decrease-btn-${item.id}`}
+              aria-label={`Decrease quantity of ${item.title}`}
             >
               -
             </button>
@@ -35,6 +46,7 @@ const Cart = () => {
               className="btn btn-danger"
               onClick={() => dispatch(removeFromCart(item.id))}
               data-cy={`remove-btn-${item.id}`}
+              aria-label={`Remove ${item.title} from cart`}
             >
               Remove
             </button>

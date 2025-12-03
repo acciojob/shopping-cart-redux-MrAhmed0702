@@ -12,14 +12,25 @@ const initialState = {
   wishlist: []
 };
 
+// Helper functions for better performance (optional for large lists)
+const getCartItemIds = (cart) => new Set(cart.map(item => item.id));
+const getWishlistItemIds = (wishlist) => new Set(wishlist.map(item => item.id));
+
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case ADD_TO_CART:
-      if (state.cart.find(p => p.id === action.payload.id)) return state;
-      return { ...state, cart: [...state.cart, { ...action.payload, qty: 1 }] };
+      // Use Set to check existence (more efficient for large lists)
+      if (getCartItemIds(state.cart).has(action.payload.id)) return state;
+      return { 
+        ...state, 
+        cart: [...state.cart, { ...action.payload, qty: 1 }] 
+      };
 
     case REMOVE_FROM_CART:
-      return { ...state, cart: state.cart.filter(p => p.id !== action.payload) };
+      return { 
+        ...state, 
+        cart: state.cart.filter(p => p.id !== action.payload) 
+      };
 
     case INCREASE_QTY:
       return {
@@ -40,13 +51,17 @@ export default function reducer(state = initialState, action) {
       };
 
     case ADD_TO_WISHLIST:
-      if (state.wishlist.find(p => p.id === action.payload.id)) return state;
-      return { ...state, wishlist: [...state.wishlist, action.payload] };
+      // Use Set to check existence (more efficient for large lists)
+      if (getWishlistItemIds(state.wishlist).has(action.payload.id)) return state;
+      return { 
+        ...state, 
+        wishlist: [...state.wishlist, action.payload] 
+      };
 
     case REMOVE_FROM_WISHLIST:
-      return {
-        ...state,
-        wishlist: state.wishlist.filter(p => p.id !== action.payload)
+      return { 
+        ...state, 
+        wishlist: state.wishlist.filter(p => p.id !== action.payload) 
       };
 
     default:
