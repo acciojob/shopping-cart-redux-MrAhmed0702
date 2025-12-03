@@ -6,7 +6,6 @@ const Wishlist = () => {
   const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
-  // Handle the case when the wishlist is empty
   if (wishlist.length === 0) {
     return (
       <div className="mt-5">
@@ -15,6 +14,14 @@ const Wishlist = () => {
       </div>
     );
   }
+
+  const handleAddToCart = (item) => {
+    dispatch(addToCart(item));
+  };
+
+  const handleRemoveFromWishlist = (id) => {
+    dispatch(removeFromWishlist(id));
+  };
 
   return (
     <div className="mt-5">
@@ -27,7 +34,7 @@ const Wishlist = () => {
 
             <button
               className="btn btn-primary mr-2"
-              onClick={() => dispatch(addToCart(item))}
+              onClick={() => handleAddToCart(item)}
               data-cy={`add-to-cart-btn-${item.id}`}
               aria-label={`Add ${item.title} to cart`}
             >
@@ -36,7 +43,7 @@ const Wishlist = () => {
 
             <button
               className="btn btn-danger"
-              onClick={() => dispatch(removeFromWishlist(item.id))}
+              onClick={() => handleRemoveFromWishlist(item.id)}
               data-cy={`remove-from-wishlist-btn-${item.id}`}
               aria-label={`Remove ${item.title} from wishlist`}
             >

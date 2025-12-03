@@ -18,7 +18,7 @@ const App = () => {
       <div>
         {/* Navbar and title updated for consistency with the test */}
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-          <h3 className="text-center">All Products</h3> {/* Updated text */}
+          <h3 className="text-center">Shopping Cart</h3> {/* Updated text */}
         </nav>
 
         {/* Container for Products, Cart, and Wishlist */}

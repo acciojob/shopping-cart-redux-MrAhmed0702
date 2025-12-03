@@ -1,43 +1,28 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import products from "../data/products";
-import { addToCart, addToWishlist } from "../redux/actions";
+// ProductList.js
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { addToCart, addToWishlist } from '../redux/actions';
+import { products } from '../data/products';  // Assuming this is where product data is stored
 
 const ProductList = () => {
   const dispatch = useDispatch();
 
+  const handleAddToCart = (product) => {
+    dispatch(addToCart(product));
+  };
+
+  const handleAddToWishlist = (product) => {
+    dispatch(addToWishlist(product));
+  };
+
   return (
-    <div className="row mt-4">
-      {products.map((p) => (
-        <div key={p.id} className="col-md-3">
-          <div className="custom-card card mb-3">
-            <img
-              src={p.image}
-              alt={p.title}  // Added alt attribute for accessibility and testing
-              className="card-img-top"
-            />
-            <div className="card-body">
-              <h4>{p.title}</h4>
-              <p>{p.description}</p>
-              <p>Rs {p.price}</p>
-
-              <button
-                className="btn btn-primary mb-2"
-                onClick={() => dispatch(addToCart(p))}
-                data-cy={`add-to-cart-btn-${p.id}`}
-              >
-                Add To Cart
-              </button>
-
-              <button
-                className="btn btn-secondary"
-                onClick={() => dispatch(addToWishlist(p))}
-                data-cy={`add-to-wishlist-btn-${p.id}`}
-              >
-                Add To Wishlist
-              </button>
-            </div>
-          </div>
+    <div className="product-list">
+      {products.map((product) => (
+        <div key={product.id} className="product">
+          <h5>{product.name}</h5>
+          <p>${product.price}</p>
+          <button onClick={() => handleAddToCart(product)} className="add-to-cart">Add to Cart</button>
+          <button onClick={() => handleAddToWishlist(product)} className="add-to-wishlist">Add to Wishlist</button>
         </div>
       ))}
     </div>
