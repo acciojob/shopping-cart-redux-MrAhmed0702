@@ -7,37 +7,33 @@ const ProductList = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className="container mt-4">
+    <div className="row mt-4">
+      {products.map((p) => (
+        <div key={p.id} className="col-md-3">
+          <div className="custom-card card mb-3">
+            <img src={p.image} className="card-img-top" />
+            <div className="card-body">
+              <h4>{p.title}</h4>
+              <p>{p.description}</p>
+              <p>Rs {p.price}</p>
 
-      <div className="row">
-        {products.map(product => (
-          <div key={product.id} className="col-md-4">
-            <div className="custom-card card">
-              <img src={product.image} className="card-img-top" />
+              <button
+                className="btn btn-primary mb-2"
+                onClick={() => dispatch(addToCart(p))}
+              >
+                Add To Cart
+              </button>
 
-              <div className="card-body">
-                <h5>{product.title}</h5>
-                <p>{product.description}</p>
-                <p>Rs {product.price}</p>
-
-                <button className="btn btn-primary"
-                  onClick={() => dispatch(addToCart(product))}
-                >
-                  Add To Cart
-                </button>
-
-                <button className="btn btn-secondary ml-2"
-                  onClick={() => dispatch(addToWishlist(product))}
-                >
-                  Wishlist
-                </button>
-
-              </div>
+              <button
+                className="btn btn-secondary"
+                onClick={() => dispatch(addToWishlist(p))}
+              >
+                Add To Wishlist
+              </button>
             </div>
           </div>
-        ))}
-      </div>
-
+        </div>
+      ))}
     </div>
   );
 };

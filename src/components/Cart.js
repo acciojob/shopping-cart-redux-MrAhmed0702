@@ -1,39 +1,36 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { removeFromCart, increaseQty, decreaseQty } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { increaseQty, decreaseQty, removeFromCart } from "../redux/actions";
 
 const Cart = () => {
-  const cart = useSelector(state => state.cart);
-  const discount = useSelector(state => state.discount);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
-  const total = cart.reduce((sum, i) => sum + i.price * i.qty, 0);
-  const finalTotal = total - (total * discount) / 100;
-
   return (
-    <div className="container mt-4">
-      <h2 className="text-start">Cart</h2>
-
-      {cart.map(item => (
-        <div key={item.id} className="row my-2 p-2 border">
-          <div className="col">
+    <div className="mt-5">
+      <h3>Cart</h3>
+      {cart.map((item) => (
+        <div key={item.id} className="card mb-2">
+          <div className="card-body">
             <h4>{item.title}</h4>
-            <p>Price: Rs {item.price}</p>
             <p>Qty: {item.qty}</p>
 
-            <button className="btn btn-success"
+            <button
+              className="btn btn-success mr-2 increase-btn"
               onClick={() => dispatch(increaseQty(item.id))}
             >
               +
             </button>
 
-            <button className="btn btn-warning mx-2"
+            <button
+              className="btn btn-warning mr-2 decrease-btn"
               onClick={() => dispatch(decreaseQty(item.id))}
             >
               -
             </button>
 
-            <button className="btn btn-danger"
+            <button
+              className="btn btn-danger"
               onClick={() => dispatch(removeFromCart(item.id))}
             >
               Remove
@@ -41,8 +38,6 @@ const Cart = () => {
           </div>
         </div>
       ))}
-
-      <h3>Total: Rs {finalTotal.toFixed(2)}</h3>
     </div>
   );
 };

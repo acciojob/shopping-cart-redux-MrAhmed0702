@@ -1,27 +1,29 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addToCart, removeFromWishlist } from "../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromWishlist, addToCart } from "../redux/actions";
 
 const Wishlist = () => {
-  const wishlist = useSelector(state => state.wishlist);
+  const wishlist = useSelector((state) => state.wishlist);
   const dispatch = useDispatch();
 
   return (
-    <div className="container mt-4">
-      <h2>Wishlist</h2>
+    <div className="mt-5">
+      <h3>Wishlist</h3>
 
-      {wishlist.map(item => (
-        <div key={item.id} className="row my-2 p-2 border">
-          <div className="col">
+      {wishlist.map((item) => (
+        <div key={item.id} className="card mb-2">
+          <div className="card-body">
             <h4>{item.title}</h4>
 
-            <button className="btn btn-primary"
+            <button
+              className="btn btn-primary mr-2"
               onClick={() => dispatch(addToCart(item))}
             >
               Add To Cart
             </button>
 
-            <button className="btn btn-danger mx-2"
+            <button
+              className="btn btn-danger"
               onClick={() => dispatch(removeFromWishlist(item.id))}
             >
               Remove
